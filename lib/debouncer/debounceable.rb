@@ -5,7 +5,12 @@ class Debouncer
         '!' => '_dangerous',
         '=' => '_assignment'
     }
-    def debounce(name, delay, rescue_with: nil, grouped: false, reduce_with: nil, class_method: false)
+    def debounce(name, delay, opts)
+      rescue_with = opts.fetch(:rescue_with, nil)
+      grouped = opts.fetch(:grouped, nil)
+      reduce_with = opts.fetch(:reduce_with, nil)
+      class_method = opts.fetch(:class_method, nil)
+
       name =~ /^(\w+)([?!=]?)$/ or
           raise ArgumentError, 'Invalid method name'
 
