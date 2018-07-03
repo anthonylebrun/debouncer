@@ -64,8 +64,8 @@ class Debouncer
       RUBY
     end
 
-    def mdebounce(name, delay, **opts)
-      debounce name, delay, class_method: true, **opts
+    def mdebounce(name, delay, opts)
+      debounce name, delay, opts.merge({class_method: true})
     end
   end
 end
