@@ -85,10 +85,7 @@ class Debouncer
 
   def flush(id = EMPTY, opts = {})
     and_join = opts.fetch(:and_join, false)
-    if @lock.owned?
-      raise ArgumentError, 'You cannot flush other groups from inside a reducer' unless id == EMPTY || [id] == @flush
-      @flush = and_join
-    elsif id == EMPTY
+    if id == EMPTY
       flush @timeouts.keys.first while @timeouts.any?
     else
       thread = exclusively do
